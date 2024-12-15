@@ -35,18 +35,6 @@ El repositorio está organizado de la siguiente manera:
 - **/dashboard**: Archivos relacionados con el Dashboard en Power BI.
 - **/docs**: Documentación del proyecto, incluyendo instrucciones y guías.
 
-## Requisitos
-
-Para ejecutar este proyecto, necesitarás tener instalados los siguientes paquetes:
-
-- `pandas`
-- `openpyxl` (para manipular archivos Excel)
-
-Puedes instalar los requisitos mediante `pip`:
-
-```bash
-pip install pandas numpy matplotlib seaborn openpyxl sqlalchemy
-
 
 src 
 Dentro de la cual se encuentra el archivo python que hará el proceso ETL 
@@ -81,13 +69,27 @@ Se estará utilizando el IDE "Visual Studio Code" para el desarrollo del código
 
 Para la visualización de los datos se utilizará PowerBI.
 
-# Librerías Necesarias
+## Librerías Necesarias
+
+
+Para ejecutar este proyecto, necesitarás tener instalados los siguientes paquetes:
+
+- `pandas`
+- `openpyxl` 
+- `word2number`
+
+Puedes instalar los requisitos mediante `pip`:
+
+```bash
+pip install pandas openpyxl word2number
+```
 
 ### Pandas
 
 Pandas es una librería de Python ampliamente utilizada para la manipulación, análisis y limpieza de datos. Proporciona estructuras de datos de alto rendimiento, como DataFrame y Series, que permiten manejar grandes volúmenes de información de manera eficiente. Es ideal para tareas como la lectura y escritura de archivos (CSV, Excel, SQL, etc.), filtrado, transformación y agrupación de datos.
 
 **Instalación:**
+
 
 ```bash
 pip install pandas
@@ -115,3 +117,6 @@ La librería `word2number` convierte números escritos en palabras (como "dos mi
 
 ```bash
 pip install word2number
+```
+
+
