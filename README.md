@@ -119,4 +119,18 @@ La librería `word2number` convierte números escritos en palabras (como "dos mi
 pip install word2number
 ```
 
+# Diagrama de flujo
 
+# Código
+
+Funciones explicadas: 
+
+Flujo del script
+
+Instalación de librerías
+
+Instrucciones paso a paso de como ejecutar los scripts
+
+# Visualizaciones
+
+Detallar como visualizar los graficos y dashboards generados 
