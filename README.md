@@ -132,11 +132,12 @@ Permite personalizar el estilo visual de una tabla, como colores, bordes y opcio
 
 
 # Diagrama de flujo
-
+![diagrama_flujo](https://github.com/user-attachments/assets/0cd3dd9f-fcfb-48a5-bf9e-1e4080f89e98)
 
 # Código
 
 Este script procesa un archivo CSV con datos de oportunidades, realiza transformaciones en las columnas, y guarda los resultados en un archivo Excel con formato de tabla.
+
 
 ## Propósito
 
