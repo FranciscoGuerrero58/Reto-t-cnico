@@ -39,7 +39,7 @@ El repositorio está organizado de la siguiente manera:
 |----------------------------------------|-------------------------------------------------------------------------------------------------------|
 | **/src**                               | Carpeta que contiene los archivos Python para el proceso ETL.                                         |
 | ├── `retoetl.py`                       | Script que realiza la extracción, transformación y visualización de datos a partir de un archivo CSV. |
-| ├── `Ejecutable.py`                    | Ejecutable del script en python.                                                                      |
+| ├── `Ejecutable.exe`                   | Ejecutable del script en python.                                                                      |
 | ├── `dashboard.pbix`                   | Dashboard creado en PowerBI para la interpretación de los datos.                                      |
 | **/data**                              | Carpeta que contiene las bases de datos originales y procesados.                                      |
 | ├── `BD_OPORTUNIDADES_23_24.cvs/`      | Datos originales sin procesar.                                                                        |
