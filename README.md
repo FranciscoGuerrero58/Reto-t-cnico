@@ -1,6 +1,3 @@
-# Reto-técnico
-Reto técnico de programación en python 
-
 # Proyecto de Transformación y Limpieza de Datos (ETL)
 
 ## Descripción
