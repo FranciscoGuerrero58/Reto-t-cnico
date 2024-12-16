@@ -80,11 +80,6 @@ Para ejecutar este proyecto, necesitarás tener instalados los siguientes paquet
 - `openpyxl` 
 - `word2number`
 
-Puedes instalar los requisitos mediante `pip`:
-
-```bash
-pip install pandas openpyxl word2number
-```
 
 ### Pandas
 
@@ -141,20 +136,8 @@ Permite personalizar el estilo visual de una tabla, como colores, bordes y opcio
 
 # Diagrama de flujo
 
-# Procesamiento de Datos con Python
 
-Este script procesa un archivo CSV con datos de oportunidades, realiza transformaciones en las columnas, y guarda los resultados en un archivo Excel con formato de tabla.
-
-## Propósito
-
-El objetivo principal es transformar y limpiar datos en un formato útil para análisis. El flujo abarca:
-1. **Extracción**: Leer datos desde un archivo CSV.
-2. **Transformación**: Aplicar limpieza, formateo, y cálculos adicionales.
-3. **Carga**: Exportar los resultados a un archivo Excel con formato tabular.
-
-## Código
-
-# Procesamiento de Datos con Python
+# Código
 
 Este script procesa un archivo CSV con datos de oportunidades, realiza transformaciones en las columnas, y guarda los resultados en un archivo Excel con formato de tabla.
 
@@ -178,6 +161,11 @@ import re
 from word2number import w2n
 from openpyxl import Workbook, load_workbook
 from openpyxl.worksheet.table import Table, TableStyleInfo
+```
+Puedes instalar los requisitos mediante `pip`:
+
+```bash
+pip install pandas openpyxl word2number
 ```
 
 ### `palabras_a_numeros`
