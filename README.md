@@ -42,6 +42,7 @@ El repositorio está organizado de la siguiente manera:
 |----------------------------------------|-------------------------------------------------------------------------------------------------------|
 | **/src**                               | Carpeta que contiene los archivos Python para el proceso ETL.                                         |
 | ├── `retoetl.py`                       | Script que realiza la extracción, transformación y visualización de datos a partir de un archivo CSV. |
+| ├── `Ejecutable.py`                    | Ejecutable del script en python.                                                                      |
 | ├── `dashboard.pbix`                   | Dashboard creado en PowerBI para la interpretación de los datos.                                      |
 | **/data**                              | Carpeta que contiene las bases de datos originales y procesados.                                      |
 | ├── `BD_OPORTUNIDADES_23_24.cvs/`      | Datos originales sin procesar.                                                                        |
@@ -140,15 +141,219 @@ Permite personalizar el estilo visual de una tabla, como colores, bordes y opcio
 
 # Diagrama de flujo
 
-# Código
+# Procesamiento de Datos con Python
 
+Este script procesa un archivo CSV con datos de oportunidades, realiza transformaciones en las columnas, y guarda los resultados en un archivo Excel con formato de tabla.
 
-Funciones explicadas: 
+## Propósito
 
-Flujo del script
+El objetivo principal es transformar y limpiar datos en un formato útil para análisis. El flujo abarca:
+1. **Extracción**: Leer datos desde un archivo CSV.
+2. **Transformación**: Aplicar limpieza, formateo, y cálculos adicionales.
+3. **Carga**: Exportar los resultados a un archivo Excel con formato tabular.
 
-Instalación de librerías
+## Código
 
+```python
+import pandas as pd
+import os
+import re
+from word2number import w2n
+from openpyxl import Workbook, load_workbook
+from openpyxl.worksheet.table import Table, TableStyleInfo
+
+# Función para estandarizar los valores alfabéticos a numéricos
+def palabras_a_numeros(texto):
+    try:
+        texto = texto.lower().strip()
+        if texto == "cero":
+            return 0
+        return w2n.word_to_num(texto)
+    except ValueError:
+        return texto  # Retorna sin cambios si no es procesable
+
+# Función para configurar en modo de tabla los datos procesados
+def configurar_tabla_excel(output_file, nombre_tabla="DatosProcesados"):
+    wb = load_workbook(output_file)
+    ws = wb.active
+
+    # Definir el rango de la tabla
+    num_filas = ws.max_row
+    num_columnas = ws.max_column
+    rango = f"A1:{chr(64 + num_columnas)}{num_filas}"
+
+    # Configurar la tabla
+    tabla = Table(displayName=nombre_tabla, ref=rango)
+    estilo = TableStyleInfo(
+        name="TableStyleMedium9", showFirstColumn=False,
+        showLastColumn=False, showRowStripes=True, showColumnStripes=True
+    )
+    tabla.tableStyleInfo = estilo
+    ws.add_table(tabla)
+    wb.save(output_file)
+
+def process_csv_to_excel():
+    # Obtiene la ruta del escritorio del usuario
+    desktop = os.path.join(os.path.expanduser("~"), r"Desktop\Tec MTY\data")
+
+    # Define la ruta de entrada y salida
+    input_file = os.path.join(desktop, "BD_OPORTUNIDADES_23_24.csv")
+    output_file = os.path.join(desktop, "OPORTUNIDADES_PROCESADO.xlsx")
+
+    try:
+        # Lee el archivo CSV
+        data = pd.read_csv(input_file)
+
+        # Identifica las columnas
+        columnas = data.columns
+        print(f"Columnas detectadas: {columnas}")
+
+        # Limpieza de datos
+        data = data.drop_duplicates()  # Elimina filas duplicadas
+        data = data.dropna(subset=['Zona'])  # Elimina registros sin 'Zona'
+
+        # Transformar a mayúsculas las columnas de IDs
+        for col in ['IdOportunidad', 'IdEmpresa', 'IdPropietario']:
+            if col in data.columns:
+                data[col] = data[col].astype(str).str.upper()
+
+        # Transformación de datos
+        if 'Importe' in data.columns:
+            data['Importe'] = data['Importe'].apply(
+                lambda x: palabras_a_numeros(x) if isinstance(x, str) else x
+            )
+            data['Importe'] = pd.to_numeric(data['Importe'], errors='coerce')  # Asegura valores numéricos
+
+        if 'FechaCierre' in data.columns:
+            data['FechaCierre'] = pd.to_datetime(data['FechaCierre'], errors='coerce', dayfirst=True)
+            data['Año de Cierre'] = data['FechaCierre'].dt.year  # Extraer año
+            data['Mes de Cierre'] = data['FechaCierre'].dt.month  # Extraer mes
+            data['FechaCierre'] = data['FechaCierre'].dt.strftime('%d/%m/%Y')
+
+        # Filtrar filas donde Importe es 0 o no existe valor
+        if 'Importe' in data.columns:
+            data = data[~(data['Importe'].isna() | (data['Importe'] == 0))]
+
+        # Nuevas columnas calculadas para el dashboard
+        if 'Importe' in data.columns:
+            data['Rango Importe'] = pd.cut(data['Importe'], bins=[0, 10000, 50000, 100000, float('inf')],
+                                           labels=['Bajo', 'Medio', 'Alto', 'Muy Alto'])
+
+        # Nueva columna: Estado Participantes
+        if 'Participantes' in data.columns:
+            data['Estado Participantes'] = data['Participantes'].apply(
+                lambda x: 'Activo' if pd.to_numeric(x, errors='coerce') > 0 else 'Inactivo' if pd.to_numeric(x, errors='coerce') == 0 else 'Desconocido'
+            )
+        else:
+            data['Estado Participantes'] = 'Desconocido'
+
+        # Verifica transformaciones
+        print("Transformaciones completadas.")
+
+        # Guarda los datos en un archivo Excel
+        data.to_excel(output_file, index=False, engine='openpyxl')
+
+        # Configura el formato de tabla en Excel
+        configurar_tabla_excel(output_file)
+
+        print(f"Archivo procesado y guardado en: {output_file}")
+    except FileNotFoundError:
+        print(f"El archivo '{input_file}' no se encontró en la ruta especificada.")
+    except Exception as e:
+        print(f"Ocurrió un error: {e}")
+
+# Ejecuta la función
+if __name__ == "__main__":
+    process_csv_to_excel()
+```
+
+## Explicación de las funciones principales
+
+### `palabras_a_numeros`
+Convierte cadenas numéricas escritas en palabras (como "uno", "diez") a valores enteros.
+
+- **Input:** Texto (str)
+- **Output:** Número (int) o texto original si no es convertible
+
+### `configurar_tabla_excel`
+Aplica formato de tabla a los datos exportados en Excel.
+
+- **Input:** Ruta del archivo Excel
+- **Output:** Archivo Excel con formato tabular
+
+### `process_csv_to_excel`
+Ejecuta el proceso principal del script:
+
+1. **Extracción**:
+    - Lee datos de un archivo CSV.
+    - Verifica la existencia del archivo.
+
+2. **Transformación**:
+    - Limpia duplicados y registros con valores faltantes en la columna `Zona`.
+    - Convierte IDs (`IdOportunidad`, `IdEmpresa`, `IdPropietario`) a mayúsculas.
+    - Convierte la columna `Importe` de texto a números y clasifica en rangos.
+    - Procesa fechas para extraer el año y el mes de cierre.
+    - Calcula el estado de los participantes (`Activo`, `Inactivo`, `Desconocido`).
+
+3. **Carga**:
+    - Guarda los datos transformados en un archivo Excel.
+    - Aplica formato tabular.
+
+- **Input:** Ruta del archivo CSV.
+- **Output:** Archivo Excel procesado.
+
+## Flujo General del Script ETL
+
+Este script sigue las etapas del proceso ETL (Extracción, Transformación y Carga) para procesar un archivo CSV y generar un archivo Excel listo para análisis.
+
+### 1. Extracción
+La fase de extracción consiste en cargar los datos originales desde un archivo CSV ubicado en una ruta especificada. El archivo fuente contiene información bruta con posibles inconsistencias:
+
+- Se utiliza la biblioteca `pandas` para leer el archivo CSV.
+- El script verifica la existencia del archivo en el directorio proporcionado.
+- Si el archivo no se encuentra, se lanza un error que finaliza el proceso.
+
+**Resultado de esta etapa:** Un `DataFrame` con los datos cargados del archivo CSV.
+
+---
+
+### 2. Transformación
+La fase de transformación incluye una serie de pasos para limpiar y enriquecer los datos. Los principales procesos son:
+
+#### a) Limpieza de Datos
+- Eliminación de filas duplicadas.
+- Remoción de registros con valores nulos en columnas clave, como `Zona`.
+
+#### b) Formateo de Datos
+- Conversión de columnas de identificadores (`IdOportunidad`, `IdEmpresa`, `IdPropietario`) a mayúsculas.
+- Conversión de la columna `Importe`:
+  - Transformación de valores textuales (como "mil") a numéricos utilizando la función `palabras_a_numeros`.
+  - Clasificación en rangos de importe: `Bajo`, `Medio`, `Alto` y `Muy Alto`.
+
+#### c) Procesamiento de Fechas
+- Transformación de la columna `FechaCierre` a formato de fecha.
+- Extracción del año y mes de cierre en columnas separadas (`Año de Cierre` y `Mes de Cierre`).
+
+#### d) Generación de Nuevas Columnas
+- **Rango Importe**: Segmenta los valores en categorías (`Bajo`, `Medio`, `Alto`, `Muy Alto`).
+- **Estado Participantes**: Determina el estado en función del número de participantes:
+  - `Activo` si es mayor a 0.
+  - `Inactivo` si es igual a 0.
+  - `Desconocido` si el valor es inválido o la columna no existe.
+
+**Resultado de esta etapa:** Datos limpios y enriquecidos listos para exportar.
+
+---
+
+### 3. Carga
+En esta fase, los datos transformados se exportan a un archivo Excel con un formato tabular.
+
+- Se utiliza `pandas` para escribir el archivo Excel.
+- La función `configurar_tabla_excel` aplica formato tabular al archivo generado.
+
+**Resultado de esta etapa:** Un archivo Excel listo para su uso en análisis o presentación.
+
+##FALTA ESTA SECCIÓN
 Instrucciones paso a paso de como ejecutar los scripts
 
 # Visualizaciones
