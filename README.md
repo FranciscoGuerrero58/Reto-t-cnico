@@ -36,23 +36,24 @@ El repositorio está organizado de la siguiente manera:
 - **/docs**: Documentación del proyecto, incluyendo instrucciones y guías.
 
 
-src 
-Dentro de la cual se encuentra el archivo python que hará el proceso ETL 
+# Estructura del Proyecto
 
-data 
-Se encuentran las bases de datos tanto el conjunto de datos original como el procesado 
+| Carpeta/Archivo                        | Descripción                                                                                           |
+|----------------------------------------|-------------------------------------------------------------------------------------------------------|
+| **/src**                               | Carpeta que contiene los archivos Python para el proceso ETL.                                         |
+| ├── `retoetl.py`                       | Script que realiza la extracción, transformación y visualización de datos a partir de un archivo CSV. |
+| ├── `dashboard.pbix`                   | Dashboard creado en PowerBI para la interpretación de los datos.                                      |
+| **/data**                              | Carpeta que contiene las bases de datos originales y procesados.                                      |
+| ├── `BD_OPORTUNIDADES_23_24.cvs/`      | Datos originales sin procesar.                                                                        |
+| ├── `OPORTUNIDADES_PROCESADO.xlsx/`    | Datos procesados y listos para análisis.                                                              |
+| **/img**                               | Carpeta que contiene las bases de datos originales y procesados.                                      |
+| ├── `Diagrama de Flujo.jpg/`           | Datos originales sin procesar.                                                                        |
+| ├── `Diagrama de Modelo de Datos.jpg/` | Datos procesados y listos para análisis.                                                              |
+| **README.md**                          | Archivo principal con la documentación.                                                               |
+| **/docs**                              | Carpeta documentación y archivos relacionados al proyecto.                                            |
+| ├── `ManualInstalación.pdf/`           | Datos originales sin procesar.                                                                        |
+| ├── `Documentación.pdf/`               | Datos procesados y listos para análisis.                                                              |
 
-img
-Se encuentra el diagrama de flujo del programa 
-
-\src
-  -retoetl.py #Este Scrip realiza la extracción, transformación y visualización de datos a partir de un archivo CVS
-\data
-  -BD_OPORTUNIDADES_23_24.cvs
-  -OPORTUNIDADES_PROCESADO.xlsx
-\img
-  -Diagrama de Flujo.jpg
-  -Diagrama de modelo de datos.jpg
 
 
 # Herramientas Utilizadas
