@@ -89,9 +89,6 @@ Pandas es una librería de Python ampliamente utilizada para la manipulación, a
 pip install pandas
 ```
 
-### Os
-
-La librería `os` es un módulo incorporado en Python que proporciona una interfaz para interactuar con el sistema operativo subyacente. Permite realizar operaciones como navegar entre directorios, manejar rutas de archivos y ejecutar comandos del sistema operativo. Es útil para la automatización y gestión de archivos y carpetas.
 
 ### Openpyxl
 
@@ -112,6 +109,9 @@ La librería `word2number` convierte números escritos en palabras (como "dos mi
 ```bash
 pip install word2number
 ```
+### Os
+
+La librería `os` es un módulo incorporado en Python que proporciona una interfaz para interactuar con el sistema operativo subyacente. Permite realizar operaciones como navegar entre directorios, manejar rutas de archivos y ejecutar comandos del sistema operativo. Es útil para la automatización y gestión de archivos y carpetas.
 
 ### Re
 
