@@ -49,10 +49,10 @@ El repositorio está organizado de la siguiente manera:
 | **/img**                               | Carpeta que contiene las bases de datos originales y procesados.                                      |
 | ├── `Diagrama de Flujo.jpg/`           | Datos originales sin procesar.                                                                        |
 | ├── `Diagrama de Modelo de Datos.jpg/` | Datos procesados y listos para análisis.                                                              |
-| **README.md**                          | Archivo principal con la documentación.                                                               |
 | **/docs**                              | Carpeta documentación y archivos relacionados al proyecto.                                            |
 | ├── `ManualInstalación.pdf/`           | Datos originales sin procesar.                                                                        |
 | ├── `Documentación.pdf/`               | Datos procesados y listos para análisis.                                                              |
+| **README.md**                          | Archivo principal con la documentación.                                                               |
 
 
 
