@@ -12,7 +12,7 @@ El reto técnico consiste en realizar un script en Python que gestione bases de 
 El objetivo principal es automatizar y optimizar el proceso de extracción, transformación y visualización de datos. Esto incluye:
 
 - **Extracción de datos** de una base de datos.
-- **Transformación y limpieza** de los datos, eliminando valores nulos, duplicados y regularizando los datos.
+- **Transformación y limpieza** de los datos, eliminando valores nulos, duplicados, estandarizando los datos.
 - **Visualización** de los resultados a través de un Dashboard interactivo y dinámico, utilizando Power BI.
 - **Automatización** de estos procesos para ahorrar tiempo y reducir errores manuales.
 
