@@ -88,7 +88,7 @@ pip install pandas openpyxl word2number
 
 Pandas es una librería de Python ampliamente utilizada para la manipulación, análisis y limpieza de datos. Proporciona estructuras de datos de alto rendimiento, como DataFrame y Series, que permiten manejar grandes volúmenes de información de manera eficiente. Es ideal para tareas como la lectura y escritura de archivos (CSV, Excel, SQL, etc.), filtrado, transformación y agrupación de datos.
 
-**Instalación:**
+**Instalación individual:**
 
 
 ```bash
@@ -103,7 +103,7 @@ La librería `os` es un módulo incorporado en Python que proporciona una interf
 
 Openpyxl es una librería de Python que permite leer y escribir archivos de Microsoft Excel (formato `.xlsx`). Es especialmente útil para automatizar tareas relacionadas con la manipulación de hojas de cálculo, como crear nuevas hojas, escribir datos en celdas y aplicar formatos.
 
-**Instalación:**
+**Instalación individual:**
 
 ```bash
 pip install openpyxl
@@ -113,15 +113,34 @@ pip install openpyxl
 
 La librería `word2number` convierte números escritos en palabras (como "dos mil" o "ciento veinte") a su formato numérico equivalente (como `2000` o `120`). Es útil en procesos de limpieza y transformación de datos donde las cifras no están representadas de manera estándar.
 
-**Instalación:**
+**Instalación individual:**
 
 ```bash
 pip install word2number
 ```
 
+### Re
+
+La librería `re` es el módulo de Python para trabajar con expresiones regulares. Las expresiones regulares son patrones que se utilizan para buscar, reemplazar, dividir o validar cadenas de texto.
+
+### WorkBook
+
+Se utiliza para crear un nuevo archivo de Excel (libro de trabajo). Este objeto representa el libro en blanco que puedes modificar, guardar y personalizar según sea necesario.
+
+
+### Table
+
+Representa una tabla en Excel, que es un rango de celdas con formato especial. Las tablas tienen encabezados, pueden tener filas totales, y soportan filtros y estilos.
+
+### TableStyleInfo
+
+Permite personalizar el estilo visual de una tabla, como colores, bordes y opciones de diseño. Se aplica al objeto Table.
+
+
 # Diagrama de flujo
 
 # Código
+
 
 Funciones explicadas: 
 
