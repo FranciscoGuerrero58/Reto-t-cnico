@@ -154,6 +154,23 @@ El objetivo principal es transformar y limpiar datos en un formato útil para an
 
 ## Código
 
+# Procesamiento de Datos con Python
+
+Este script procesa un archivo CSV con datos de oportunidades, realiza transformaciones en las columnas, y guarda los resultados en un archivo Excel con formato de tabla.
+
+## Propósito
+
+El objetivo principal es transformar y limpiar datos en un formato útil para análisis. El flujo abarca:
+1. **Extracción**: Leer datos desde un archivo CSV.
+2. **Transformación**: Aplicar limpieza, formateo, y cálculos adicionales.
+3. **Carga**: Exportar los resultados a un archivo Excel con formato tabular.
+
+## Código y Explicación
+
+### Importación de Bibliotecas
+
+El script utiliza bibliotecas como `pandas` para la manipulación de datos, `os` para manejar rutas, y `openpyxl` para trabajar con archivos Excel.
+
 ```python
 import pandas as pd
 import os
@@ -161,7 +178,16 @@ import re
 from word2number import w2n
 from openpyxl import Workbook, load_workbook
 from openpyxl.worksheet.table import Table, TableStyleInfo
+```
 
+### `palabras_a_numeros`
+
+Esta función convierte cadenas numéricas escritas en palabras (como "uno", "diez") a valores enteros.
+
+- **Input:** Texto (str)
+- **Output:** Número (int) o texto original si no es convertible.
+
+```python
 # Función para estandarizar los valores alfabéticos a numéricos
 def palabras_a_numeros(texto):
     try:
@@ -171,7 +197,16 @@ def palabras_a_numeros(texto):
         return w2n.word_to_num(texto)
     except ValueError:
         return texto  # Retorna sin cambios si no es procesable
+```
 
+### `configurar_tabla_excel`
+
+Aplica formato de tabla a los datos exportados en Excel. Define un rango basado en el tamaño de los datos y aplica un estilo predeterminado.
+
+- **Input:** Ruta del archivo Excel.
+- **Output:** Archivo Excel con formato tabular.
+
+```python
 # Función para configurar en modo de tabla los datos procesados
 def configurar_tabla_excel(output_file, nombre_tabla="DatosProcesados"):
     wb = load_workbook(output_file)
@@ -191,7 +226,17 @@ def configurar_tabla_excel(output_file, nombre_tabla="DatosProcesados"):
     tabla.tableStyleInfo = estilo
     ws.add_table(tabla)
     wb.save(output_file)
+```
 
+### `process_csv_to_excel`
+
+Esta es la función principal del script, donde se ejecuta todo el flujo ETL (Extracción, Transformación y Carga).
+
+#### **Extracción**
+
+Se define la ruta de entrada del archivo CSV y se verifica su existencia.
+
+```python
 def process_csv_to_excel():
     # Obtiene la ruta del escritorio del usuario
     desktop = os.path.join(os.path.expanduser("~"), r"Desktop\Tec MTY\data")
@@ -207,49 +252,73 @@ def process_csv_to_excel():
         # Identifica las columnas
         columnas = data.columns
         print(f"Columnas detectadas: {columnas}")
+```
 
+#### **Transformación**
+
+Se realizan las siguientes tareas:
+
+1. **Limpieza de datos:**
+   - Se eliminan filas duplicadas.
+   - Se eliminan registros sin valores en la columna `Zona`.
+
+```python
         # Limpieza de datos
         data = data.drop_duplicates()  # Elimina filas duplicadas
         data = data.dropna(subset=['Zona'])  # Elimina registros sin 'Zona'
+```
 
+2. **Formateo de columnas:**
+   - Convierte IDs a mayúsculas.
+   - Transforma la columna `Importe` de texto a números.
+
+```python
         # Transformar a mayúsculas las columnas de IDs
         for col in ['IdOportunidad', 'IdEmpresa', 'IdPropietario']:
             if col in data.columns:
                 data[col] = data[col].astype(str).str.upper()
 
-        # Transformación de datos
         if 'Importe' in data.columns:
             data['Importe'] = data['Importe'].apply(
                 lambda x: palabras_a_numeros(x) if isinstance(x, str) else x
             )
             data['Importe'] = pd.to_numeric(data['Importe'], errors='coerce')  # Asegura valores numéricos
+```
 
+3. **Procesamiento de fechas:**
+   - Convierte la columna `FechaCierre` a formato de fecha.
+   - Extrae el año y el mes de cierre en columnas separadas.
+
+```python
         if 'FechaCierre' in data.columns:
             data['FechaCierre'] = pd.to_datetime(data['FechaCierre'], errors='coerce', dayfirst=True)
             data['Año de Cierre'] = data['FechaCierre'].dt.year  # Extraer año
             data['Mes de Cierre'] = data['FechaCierre'].dt.month  # Extraer mes
             data['FechaCierre'] = data['FechaCierre'].dt.strftime('%d/%m/%Y')
+```
 
-        # Filtrar filas donde Importe es 0 o no existe valor
-        if 'Importe' in data.columns:
-            data = data[~(data['Importe'].isna() | (data['Importe'] == 0))]
+4. **Generación de nuevas columnas:**
+   - Clasifica importes en rangos (`Bajo`, `Medio`, `Alto`, `Muy Alto`).
+   - Calcula el estado de los participantes (`Activo`, `Inactivo`, `Desconocido`).
 
-        # Nuevas columnas calculadas para el dashboard
+```python
         if 'Importe' in data.columns:
             data['Rango Importe'] = pd.cut(data['Importe'], bins=[0, 10000, 50000, 100000, float('inf')],
                                            labels=['Bajo', 'Medio', 'Alto', 'Muy Alto'])
 
-        # Nueva columna: Estado Participantes
         if 'Participantes' in data.columns:
             data['Estado Participantes'] = data['Participantes'].apply(
                 lambda x: 'Activo' if pd.to_numeric(x, errors='coerce') > 0 else 'Inactivo' if pd.to_numeric(x, errors='coerce') == 0 else 'Desconocido'
             )
         else:
             data['Estado Participantes'] = 'Desconocido'
+```
 
-        # Verifica transformaciones
-        print("Transformaciones completadas.")
+#### **Carga**
 
+Se exportan los datos transformados a un archivo Excel con formato tabular.
+
+```python
         # Guarda los datos en un archivo Excel
         data.to_excel(output_file, index=False, engine='openpyxl')
 
@@ -261,46 +330,18 @@ def process_csv_to_excel():
         print(f"El archivo '{input_file}' no se encontró en la ruta especificada.")
     except Exception as e:
         print(f"Ocurrió un error: {e}")
+```
 
+### Ejecución del Script
+
+El script se ejecuta automáticamente cuando se llama directamente, procesando los datos según el flujo definido.
+
+```python
 # Ejecuta la función
 if __name__ == "__main__":
     process_csv_to_excel()
 ```
 
-## Explicación de las funciones principales
-
-### `palabras_a_numeros`
-Convierte cadenas numéricas escritas en palabras (como "uno", "diez") a valores enteros.
-
-- **Input:** Texto (str)
-- **Output:** Número (int) o texto original si no es convertible
-
-### `configurar_tabla_excel`
-Aplica formato de tabla a los datos exportados en Excel.
-
-- **Input:** Ruta del archivo Excel
-- **Output:** Archivo Excel con formato tabular
-
-### `process_csv_to_excel`
-Ejecuta el proceso principal del script:
-
-1. **Extracción**:
-    - Lee datos de un archivo CSV.
-    - Verifica la existencia del archivo.
-
-2. **Transformación**:
-    - Limpia duplicados y registros con valores faltantes en la columna `Zona`.
-    - Convierte IDs (`IdOportunidad`, `IdEmpresa`, `IdPropietario`) a mayúsculas.
-    - Convierte la columna `Importe` de texto a números y clasifica en rangos.
-    - Procesa fechas para extraer el año y el mes de cierre.
-    - Calcula el estado de los participantes (`Activo`, `Inactivo`, `Desconocido`).
-
-3. **Carga**:
-    - Guarda los datos transformados en un archivo Excel.
-    - Aplica formato tabular.
-
-- **Input:** Ruta del archivo CSV.
-- **Output:** Archivo Excel procesado.
 
 ## Flujo General del Script ETL
 
@@ -353,7 +394,7 @@ En esta fase, los datos transformados se exportan a un archivo Excel con un form
 
 **Resultado de esta etapa:** Un archivo Excel listo para su uso en análisis o presentación.
 
-##FALTA ESTA SECCIÓN
+# FALTA ESTA SECCIÓN
 Instrucciones paso a paso de como ejecutar los scripts
 
 # Visualizaciones
