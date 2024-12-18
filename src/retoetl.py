@@ -51,7 +51,7 @@ def process_csv_to_excel():
         columnas = data.columns
         print(f"Columnas detectadas: {columnas}")
 
-        # Limpieza de datos
+        # Limpieza de datos eliminación de datos duplicados y de registros sin zona
         data = data.drop_duplicates() 
         data = data.dropna(subset=['Zona']) 
 
