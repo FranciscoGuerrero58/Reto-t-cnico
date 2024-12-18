@@ -48,7 +48,7 @@ El repositorio está organizado de la siguiente manera:
 | ├── `Diagrama de Flujo.jpg/`           | Datos originales sin procesar.                                                                        |
 | ├── `Diagrama de Modelo de Datos.jpg/` | Datos procesados y listos para análisis.                                                              |
 | **/docs**                              | Carpeta documentación y archivos relacionados al proyecto.                                            |
-| ├── `Dashboard.pdf/`                   | Dashboard con la interpretación de los datos                                                          |
+| ├── `Dashboard.pdf/`                   | Documento con la interpretación de los datos                                                          |
 | **README.md**                          | Archivo principal con la documentación.                                                               |
 
 
