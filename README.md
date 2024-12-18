@@ -39,7 +39,7 @@ El repositorio está organizado de la siguiente manera:
 |----------------------------------------|-------------------------------------------------------------------------------------------------------|
 | **/src**                               | Carpeta que contiene los archivos Python para el proceso ETL.                                         |
 | ├── `retoetl.py`                       | Script que realiza la extracción, transformación y visualización de datos a partir de un archivo CSV. |
-| ├── `Ejecutable.exe`                   | Ejecutable del script en python.                                                                      |
+| ├── `retoetl.exe`                      | Ejecutable del script en python.                                                                      |
 | ├── `dashboard.pbix`                   | Dashboard creado en PowerBI para la interpretación de los datos.                                      |
 | **/data**                              | Carpeta que contiene las bases de datos originales y procesados.                                      |
 | ├── `BD_OPORTUNIDADES_23_24.cvs/`      | Datos originales sin procesar.                                                                        |
@@ -48,8 +48,7 @@ El repositorio está organizado de la siguiente manera:
 | ├── `Diagrama de Flujo.jpg/`           | Datos originales sin procesar.                                                                        |
 | ├── `Diagrama de Modelo de Datos.jpg/` | Datos procesados y listos para análisis.                                                              |
 | **/docs**                              | Carpeta documentación y archivos relacionados al proyecto.                                            |
-| ├── `ManualInstalación.pdf/`           | Datos originales sin procesar.                                                                        |
-| ├── `Documentación.pdf/`               | Datos procesados y listos para análisis.                                                              |
+| ├── `Dashboard.pdf/`                   | Dashboard con la interpretación de los datos                                                          |
 | **README.md**                          | Archivo principal con la documentación.                                                               |
 
 
