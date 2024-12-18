@@ -406,7 +406,7 @@ pip install pandas openpyxl word2number
 ![terminal](https://github.com/user-attachments/assets/bd8c9840-3203-4138-8bda-144497eea32e)
 
 ## Ejecución del Proyecto
-1. Una vez instaladas las librerías, abre el archivo ejecutable `retoetl.exe`.
+1. Una vez instaladas las librerías, se deberá ejecutar el script `retoetl.py`.
 2. Al ejecutar el archivo:
    - Se mostrará en la terminal la identificación de las columnas del archivo sin procesar.
    - Aparecerá una confirmación de que las transformaciones se han aplicado correctamente.
