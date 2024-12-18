@@ -384,7 +384,9 @@ En esta fase, los datos transformados se exportan a un archivo Excel con un form
 ## Descargar el Repositorio
 1. Accede al repositorio de GitHub: `git@github.com:FranciscoGuerrero58/Reto-t-cnico.git`.
 2. Haz clic en el botón “Code” y selecciona “Download ZIP”.
-![Descargagit](https://github.com/user-attachments/assets/a9306915-ba49-4eb4-8eca-0251aac8201b)
+   
+![Descargagit](https://github.com/user-attachments/assets/d8da3fd1-af7d-41f6-a35e-1a70922dcca5)
+
 
 ## Preparación de los Archivos
 1. Descomprime los archivos descargados.
