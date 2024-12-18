@@ -432,38 +432,46 @@ Verifica que el archivo procesado exista y se haya creado con éxito.
 
 ## Requisitos
 Es necesario tener Power BI instalado. Puedes descargarlo desde la Microsoft Store si no lo tienes instalado.
+
 ![PowerBIdw](https://github.com/user-attachments/assets/315b62b3-2d1e-4ea6-960a-48002547a724)
 
 ## Abrir el Dashboard
 1. En la carpeta `src`, localiza el archivo `Dashboard.pbix`.
-   ![explorador de archivos2](https://github.com/user-attachments/assets/cddd3ea7-f1f8-48f7-ae8e-f6bee237fd3a)
+   
+![explorador de archivos2](https://github.com/user-attachments/assets/cddd3ea7-f1f8-48f7-ae8e-f6bee237fd3a)
 
-2. Haz doble clic para abrirlo en Power BI.
-3. Dentro del archivo encontrarás un informe de ventas anuales con diversos filtros interactivos.
+3. Haz doble clic para abrirlo en Power BI.
+4. Dentro del archivo encontrarás un informe de ventas anuales con diversos filtros interactivos.
+
 ![dashboard](https://github.com/user-attachments/assets/eb1b91ae-29dc-4331-aecc-405f3fb85427)
 
 ## Descripción de los Filtros
 - **Zona:** Permite visualizar el top 3 de empresas y asesores en crecimiento comparando 2023 con 2024, así como un recuento de los registros en esa zona.
-  ![zona](https://github.com/user-attachments/assets/5d892ea0-af70-415f-83a2-36b883aaa3ac)
+
+![zona](https://github.com/user-attachments/assets/5d892ea0-af70-415f-83a2-36b883aaa3ac)
 
 - **Rango de Importe:**
   - Rango de valores: `0`, `10000`, `50000`, `100000`.
   - Clasificaciones: Bajo, Medio, Alto y Muy Alto.
   - Ayuda a identificar la tendencia de ventas según el valor filtrado.
-    ![rango](https://github.com/user-attachments/assets/7c36cb72-4517-4616-98b9-99aa5a6b6fca)
+  
+![rango](https://github.com/user-attachments/assets/7c36cb72-4517-4616-98b9-99aa5a6b6fca)
 
 - **Estado de Participantes:** Muestra las tendencias en ventas cuando:
   - Hay más de un participante por oportunidad.
   - No hay participantes (0).
   - Se desconoce el número de participantes.
-    ![status](https://github.com/user-attachments/assets/94dbd57b-e32d-4f71-aa48-22ece85de696)
+
+![status](https://github.com/user-attachments/assets/94dbd57b-e32d-4f71-aa48-22ece85de696)
 
 - **Divisa:** Permite analizar las tendencias de ventas según la moneda utilizada (Euros, Pesos Mexicanos o Dólares Estadounidenses).
-  ![divisa](https://github.com/user-attachments/assets/671ae3c4-7eba-4f72-bd1b-fe1db963e87d)
+
+![divisa](https://github.com/user-attachments/assets/671ae3c4-7eba-4f72-bd1b-fe1db963e87d)
 
 - **Mes de Cierre:** Ayuda a visualizar mes a mes:
   - La empresa, zona o asesor con mayor porcentaje de crecimiento.
   - El número de registros para ese mes.
+
 ![mes](https://github.com/user-attachments/assets/c73fe0ba-3562-4855-921b-ba3b4617b2ff)
 
 ---
