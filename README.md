@@ -405,6 +405,12 @@ pip install pandas openpyxl word2number
 ```
 ![terminal](https://github.com/user-attachments/assets/bd8c9840-3203-4138-8bda-144497eea32e)
 
+
+4. Cambiar la ruta del archivo en la función `process_csv_to_excel` por la ruta de la carpeta descargada de GitHub.
+
+![función](https://github.com/user-attachments/assets/b2ca15cd-8be1-4a5c-9b9e-51f51073e610)
+
+
 ## Ejecución del Proyecto
 1. Una vez instaladas las librerías, se deberá ejecutar el script `retoetl.py`.
 2. Al ejecutar el archivo:
