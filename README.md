@@ -443,7 +443,8 @@ Es necesario tener Power BI instalado. Puedes descargarlo desde la Microsoft Sto
 3. Haz doble clic para abrirlo en Power BI.
 4. Dentro del archivo encontrarás un informe de ventas anuales con diversos filtros interactivos.
 
-![dashboard](https://github.com/user-attachments/assets/eb1b91ae-29dc-4331-aecc-405f3fb85427)
+![dashboard](https://github.com/user-attachments/assets/ea58d2e2-4502-4496-98ad-13602217012b)
+
 
 ## Descripción de los Filtros
 - **Zona:** Permite visualizar el top 3 de empresas y asesores en crecimiento comparando 2023 con 2024, así como un recuento de los registros en esa zona.
