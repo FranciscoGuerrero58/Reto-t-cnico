@@ -52,8 +52,8 @@ def process_csv_to_excel():
         print(f"Columnas detectadas: {columnas}")
 
         # Limpieza de datos
-        data = data.drop_duplicates()  # Elimina filas duplicadas
-        data = data.dropna(subset=['Zona'])  # Elimina registros sin 'Zona'
+        data = data.drop_duplicates() 
+        data = data.dropna(subset=['Zona']) 
 
         # Transformar a mayúsculas las columnas de IDs
         for col in ['IdOportunidad', 'IdEmpresa', 'IdPropietario']:
