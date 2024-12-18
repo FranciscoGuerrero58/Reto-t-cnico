@@ -44,9 +44,6 @@ El repositorio está organizado de la siguiente manera:
 | **/data**                              | Carpeta que contiene las bases de datos originales y procesados.                                      |
 | ├── `BD_OPORTUNIDADES_23_24.cvs/`      | Datos originales sin procesar.                                                                        |
 | ├── `OPORTUNIDADES_PROCESADO.xlsx/`    | Datos procesados y listos para análisis.                                                              |
-| **/img**                               | Carpeta que contiene las bases de datos originales y procesados.                                      |
-| ├── `Diagrama de Flujo.jpg/`           | Datos originales sin procesar.                                                                        |
-| ├── `Diagrama de Modelo de Datos.jpg/` | Datos procesados y listos para análisis.                                                              |
 | **/docs**                              | Carpeta documentación y archivos relacionados al proyecto.                                            |
 | ├── `Dashboard.pdf/`                   | Documento con la interpretación de los datos                                                          |
 | **README.md**                          | Archivo principal con la documentación.                                                               |
