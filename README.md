@@ -403,10 +403,11 @@ Las siguientes librerías deben estar instaladas:
 - `word2number`
 - `openpyxl`
 
-Para instalarlas, utiliza el siguiente comando:
+Para instalarlas, utiliza el siguiente comando en la terminal:
 ```bash
 pip install pandas openpyxl word2number
 ```
+![terminal](https://github.com/user-attachments/assets/bd8c9840-3203-4138-8bda-144497eea32e)
 
 ## Ejecución del Proyecto
 1. Una vez instaladas las librerías, abre el archivo ejecutable `retoetl.exe`.
