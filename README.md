@@ -29,7 +29,6 @@ El repositorio está organizado de la siguiente manera:
 
 - **/src**: Contiene los scripts de Python para la extracción, transformación y limpieza de los datos.
 - **/data**: Carpeta con los archivos de datos originales y los datos procesados (Excel).
-- **/dashboard**: Archivos relacionados con el Dashboard en Power BI.
 - **/docs**: Documentación del proyecto, incluyendo instrucciones y guías.
 
 
